@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "eitems/api/user;v1";
+import "google/api/annotations.proto";
+
+service User{
+
+  rpc CreatUser(CreatUserRequest)returns(CreatUserRes){
+    option (google.api.http) = {
+      post: "/user/registration"
+      body: "*"
+    };
+  }
+
+  rpc GetUser(GetUserReq)returns(GetUserRes){
+    option (google.api.http) = {
+      get: "/user/{id}"
+    };
+  }
+}
+
+message GetUserReq{
+  int64 id = 1;
+}
+
+message GetUserRes{
+  int64 id = 1;
+  string username = 2;
+}
+
+message CreatUserRequest{
+  string UserName = 1;
+  string Password = 2;
+  string Gender = 3;
+  string Email = 4;
+  int32 Age = 5;
+}
+
+message CreatUserRes{
+  string Message = 1;
+}
